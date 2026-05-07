@@ -31,7 +31,14 @@ export default function Root() {
           const username = accData.getmydoc.username;
           setAuth({ token, username, userId });
         })
-        .catch(() => localStorage.removeItem("med_token"))
+        .catch((error) => {
+          localStorage.removeItem("med_token");
+
+          if (error.response.data.status === 429) {
+            toast("Too many reques please try again later", "error");
+            return;
+          }
+        })
         .finally(() => setChecking(false));
     }
     avoidwarn();

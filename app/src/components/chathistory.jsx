@@ -23,7 +23,12 @@ export default function HistoryPanel({
     try {
       const { data } = await api.get(`/getmyallchats/${username}`);
       setSessions(data.getmychathistory || []);
-    } catch {
+    } catch (error) {
+      if (error.response.data.status === 429) {
+        toast("Too many reques please try again later", "error");
+        return;
+      }
+
       toast("Failed to load chat history", "error");
     } finally {
       setLoading(false);
@@ -50,7 +55,12 @@ export default function HistoryPanel({
       setSessions((p) => p.filter((s) => s.id !== id));
       toast("Chat deleted", "success");
       if (activeChatId === id) onNewChat();
-    } catch {
+    } catch (error) {
+      if (error.response.data.status === 429) {
+        toast("Too many reques please try again later", "error");
+        return;
+      }
+
       toast("Failed to delete chat", "error");
     }
   };

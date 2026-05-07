@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const API_BASE = "https://medic-ai-chat-bot-backend-3.onrender.com";
+export const API_BASE = "https://medic-ai-chat-bot-backend-3.onrender.com"
+// http://localhost:3000;
 
 export const api = axios.create({ baseURL: API_BASE });
 

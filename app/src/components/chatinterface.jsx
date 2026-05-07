@@ -81,8 +81,13 @@ export default function ChatInterface({
             updateddata: { chathistoryofuser: sanitized },
           });
         }
-      } catch {
-        // Silently fail — auto-save is best-effort
+      } catch (error) {
+        if (error.response.data.status === 429) {
+          toast("Too many reques please try again later", "error");
+          return;
+        }
+
+        toast("Failed to save chats", "error");
       }
     };
     persist();

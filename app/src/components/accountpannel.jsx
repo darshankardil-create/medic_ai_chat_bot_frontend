@@ -20,7 +20,12 @@ export default function AccountPanel({
       try {
         const { data } = await api.get(`/getmyaccinfo/${userId}`);
         setInfo(data.getmydoc);
-      } catch {
+      } catch (error) {
+        if (error.response.data.status === 429) {
+          toast("Too many reques please try again later", "error");
+          return;
+        }
+
         toast("Failed to load account info", "error");
       } finally {
         setLoading(false);
@@ -44,6 +49,11 @@ export default function AccountPanel({
       localStorage.removeItem("med_token");
       onDeleteAccount();
     } catch (err) {
+      if (err.response.data.status === 429) {
+        toast("Too many reques please try again later", "error");
+        return;
+      }
+
       const msg =
         err.response?.data?.message || "Invalid credentials or deletion failed";
       toast(msg, "error");

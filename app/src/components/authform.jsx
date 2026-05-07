@@ -25,6 +25,11 @@ export default function AuthForm({ onAuth, toast }) {
       );
       onAuth(data.token, form.username);
     } catch (err) {
+      if (err.response.data.status === 429) {
+        toast("Too many reques please try again later", "error");
+        return;
+      }
+
       const msg = err.response?.data?.message || "Something went wrong";
       toast(msg, "error");
     } finally {
