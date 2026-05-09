@@ -1,6 +1,9 @@
 # MediQuery: AI Medical Knowledge Assistant
 
 ## Visit Live Website : https://medicaichatbotfrontend.vercel.app
+
+### To understand the core part of this application, please visit the backend repository by clicking the link below, and refer to the backend README and source code:
+
 ## Backend repository: https://github.com/darshankardil-create/medic_ai_chat_bot_backend
 
 **MediQuery** is a sophisticated, AI-driven medical chat application built with **Next.js**. It leverages RAG (Retrieval-Augmented Generation) against a medical encyclopedia to provide users with accurate, concise, and reliable medical information.
